@@ -1,6 +1,8 @@
 package model;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable{
 	
 	public static int TI = 1;
 	public static int CC = 2;
@@ -9,16 +11,16 @@ public class Cliente {
 	
 	private String nombre;
 	private String apellido;
-	private int tipoDocumento;
+	private int tipoIdentificacion;
 	private int numeroIdentificacion;
 	private int telefono;
 	private String direccion;
 	
-	public Cliente(String nombre, String apellido, int tipoDocumento,int numeroIdentificacion, int telefono, String direccion) {
+	public Cliente(String nombre, String apellido, int tipoIdentificacion,int numeroIdentificacion, int telefono, String direccion) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.tipoDocumento=tipoDocumento;
+		this.tipoIdentificacion=tipoIdentificacion;
 		this.numeroIdentificacion = numeroIdentificacion;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -34,10 +36,10 @@ public class Cliente {
 	}
 	
 	public int getTipoDocumento() {
-		return tipoDocumento;
+		return tipoIdentificacion;
 	}
 	public void setTipoDocumento(int tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+		this.tipoIdentificacion = tipoDocumento;
 	}
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
@@ -75,14 +77,14 @@ public class Cliente {
 	
 	public int typeDocuments() {
 		int tipo = 0;
-		if (tipoDocumento == TI) {
+		if (tipoIdentificacion == TI) {
 			tipo= 1;
 		}
-		if (tipoDocumento == CC) {
+		if (tipoIdentificacion == CC) {
 			tipo= 2;
 
 		}
-		if (tipoDocumento == PP) {
+		if (tipoIdentificacion == PP) {
 			tipo = 3;
 
 		} else {

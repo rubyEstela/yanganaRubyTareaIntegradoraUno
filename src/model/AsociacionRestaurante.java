@@ -1,6 +1,8 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class AsociacionRestaurante {
 	public final static String GUARDAR_CLIENTES = "data/clientes.c";
 	public final static String GUARDAR_PRODUCTOS = "data/productos.p";
 	public final static String GUARDAR_PEDIDOS = "data/pedidos.pd";
+	private final static String SEPARATOR = ",";
 
 	Restaurante rl = new Restaurante();
 
@@ -54,5 +57,39 @@ public class AsociacionRestaurante {
 		oos.writeObject(rl.getPedido());
 		oos.close();
 	}
+	
+	// importar datos restaurante , 
+	
+	/*public void importData(String f) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		String line = br.readLine();
+		while(line!=null) {
+			String[] parts = line.split(SEPARATOR);
+			String name = parts[0];
+			double amount = Double.parseDouble(parts[1]);
+			guardarRestaurantes();
+			guardarClientes();
+			guardarProductos();
+			guardarpedido();
+			
+			
+			
+			line = br.readLine();
+		}
+		br.close();
+	}*/
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-}
+
