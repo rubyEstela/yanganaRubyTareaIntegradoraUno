@@ -1,12 +1,17 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Restaurante {
 	private String nombre;
 	private int nit;
 	private String nombreAdministrador;
+	private final static String SEPARATOR = ",";
 
 	public Restaurante(String nombre, int nit, String nombreAdministrador) {
 		super();
@@ -42,6 +47,17 @@ public class Restaurante {
 		return pedidos;
 
 	}
+	
+	public void ordenarPorTelefono() {
+		Collections.sort(clientes);
+		
+   
+	}
+	public void ordenarPorApellido() {
+		ApellidoComparator nc = new ApellidoComparator();
+		Collections.sort(clientes, nc);
+		
+	}
 
 	public void addClientes(String nombre, String apellido, int tipoDocumento, int numeroIdentificacion, int telefono,
 			String direccion) {
@@ -54,6 +70,11 @@ public class Restaurante {
 		Producto prod = new Producto(nombre,codigo,descripcion,costo,nitRestaurante);
 		Producto.add(prod);
 	}
+	public void addPedido(int codigoPedido, int codigoCliente, int nitRestaurante, int cantidad, int hora) {
+		Pedido pd = new Pedido(codigoPedido,codigoCliente,nitRestaurante,cantidad,hora);
+		Pedido.add(pd);
+	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -79,4 +100,45 @@ public class Restaurante {
 		this.nombreAdministrador = nombreAdministrador;
 	}
 
+	
+	
+				public void importarCliente(String c) throws IOException {
+					BufferedReader br = new BufferedReader(new FileReader(c));
+					String line = br.readLine();
+					while(line!=null) {
+						String[] parts = line.split(SEPARATOR);
+						String name = parts[0];
+						double amount = Double.parseDouble(parts[1]);
+					addClientes(name, name, nit, nit, nit, name);
+					line = br.readLine();
+					}
+					br.close();
+				}
+				public void importarProducto(String p) throws IOException {
+					BufferedReader br = new BufferedReader(new FileReader(p));
+					String line = br.readLine();
+					while(line!=null) {
+						String[] parts = line.split(SEPARATOR);
+						String name = parts[0];
+						double amount = Double.parseDouble(parts[1]);
+					    addProducto(name, name, name, amount, nit);
+						
+						line = br.readLine();
+					}
+					br.close();
+				}
+			    
+				public void importarPedido(String pd) throws IOException {
+					BufferedReader br = new BufferedReader(new FileReader(pd));
+					String line = br.readLine();
+					while(line!=null) {
+						String[] parts = line.split(SEPARATOR);
+						String name = parts[0];
+						double amount = Double.parseDouble(parts[1]);
+					    addPedido(nit, nit, nit, nit, nit);
+						
+						line = br.readLine();
+					}
+					br.close();
+				}
 }

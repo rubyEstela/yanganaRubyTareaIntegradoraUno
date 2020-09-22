@@ -1,8 +1,10 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Cliente implements Serializable{
+public class Cliente implements Serializable,  Comparable<Cliente>{
 	
 	public static int TI = 1;
 	public static int CC = 2;
@@ -16,6 +18,16 @@ public class Cliente implements Serializable{
 	private int telefono;
 	private String direccion;
 	
+	private List<Pedido> pedidos;
+
+	public Cliente() {
+		pedidos = new ArrayList<>();
+	}
+	
+	public List<Pedido> getPedido() {
+		return pedidos;
+
+	}
 	public Cliente(String nombre, String apellido, int tipoIdentificacion,int numeroIdentificacion, int telefono, String direccion) {
 		super();
 		this.nombre = nombre;
@@ -25,6 +37,12 @@ public class Cliente implements Serializable{
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
+	public void addPedido(int codigoPedido, int codigoCliente, int nitRestaurante, int cantidad, int hora) {
+		Pedido pd = new Pedido(codigoPedido,codigoCliente,nitRestaurante,cantidad,hora);
+		Pedido.add(pd);
+	}
+	
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -94,6 +112,18 @@ public class Cliente implements Serializable{
 		return tipo;
 		
 
+	}
+	@Override
+	public int compareTo(Cliente tl) {
+		int comp;
+		if(telefono<tl.getTelefono()) {
+			comp=-1;
+		}else if(telefono>tl.getTelefono()) {
+			comp=1;
+		}else {
+			comp=0;
+		}return comp;
+		
 	}
 	
 	

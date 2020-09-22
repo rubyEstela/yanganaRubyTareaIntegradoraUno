@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class AsociacionRestaurante {
@@ -29,7 +31,8 @@ public class AsociacionRestaurante {
 
 	}
 
-	public void addRestaurante(String nombre, int nit, String nombreAdministrador) {
+
+	public void addRestaurante(String nombre, int nit ,String nombreAdministrador) {
 		Restaurante r = new Restaurante(nombre, nit, nombreAdministrador);
 		restaurant.add(r);
 
@@ -85,7 +88,7 @@ public class AsociacionRestaurante {
 	
 	
 	
-	
+
 	
 	
 	
