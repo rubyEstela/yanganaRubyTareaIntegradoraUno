@@ -1,18 +1,27 @@
 package model;
 
-public class Producto {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Serializable;
+
+public class Producto implements Serializable {
+	public final static long serialVersionUID = 1;
 	private String nombre;
 	private String codigo;
 	private String descripcion;
 	private double costo;
-	private int nitRestaurante;
-	public Producto(String nombre, String codigo, String descripcion, double costo, int nitRestaurante) {
+	private int nitRestaurante2;
+	public Producto(String nombre, String codigo, String descripcion, double costo,int nitRestaurante2) {
 		super();
 		this.nombre = nombre;
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.costo = costo;
-		this.nitRestaurante = nitRestaurante;
+		this.nitRestaurante2 = nitRestaurante2;
+	}
+	public Producto(String nombre2, String nombre3, String nombre4, String nit, String nit2) {
+		// TODO Auto-generated constructor stub
 	}
 	public String getNombre() {
 		return nombre;
@@ -39,15 +48,16 @@ public class Producto {
 		this.costo = costo;
 	}
 	public int getNitRestaurante() {
-		return nitRestaurante;
+		return nitRestaurante2;
 	}
 	public void setNitRestaurante(int nitRestaurante) {
-		this.nitRestaurante = nitRestaurante;
+		this.nitRestaurante2 = nitRestaurante;
 	}
 	public static void add(Producto prod) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	
 

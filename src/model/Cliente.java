@@ -1,10 +1,13 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cliente implements Serializable,  Comparable<Cliente>{
+	public final static long serialVersionUID = 1;
 	
 	public static int TI = 1;
 	public static int CC = 2;
@@ -17,6 +20,7 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 	private int numeroIdentificacion;
 	private int telefono;
 	private String direccion;
+	private final static String SEPARATOR = ",";
 	
 	private List<Pedido> pedidos;
 
@@ -28,6 +32,9 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 		return pedidos;
 
 	}
+	
+	
+	
 	public Cliente(String nombre, String apellido, int tipoIdentificacion,int numeroIdentificacion, int telefono, String direccion) {
 		super();
 		this.nombre = nombre;
@@ -36,10 +43,6 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 		this.numeroIdentificacion = numeroIdentificacion;
 		this.telefono = telefono;
 		this.direccion = direccion;
-	}
-	public void addPedido(int codigoPedido, int codigoCliente, int nitRestaurante, int cantidad, int hora) {
-		Pedido pd = new Pedido(codigoPedido,codigoCliente,nitRestaurante,cantidad,hora);
-		Pedido.add(pd);
 	}
 	
 	
@@ -113,13 +116,18 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 		
 
 	}
+	
+	
+	/**
+	 * ordeno  el numero de identificacion del cliente de manera descendente
+	 */
 	@Override
-	public int compareTo(Cliente tl) {
+	public int compareTo(Cliente documento) {
 		int comp;
-		if(telefono<tl.getTelefono()) {
-			comp=-1;
-		}else if(telefono>tl.getTelefono()) {
+		if(numeroIdentificacion<documento.numeroIdentificacion) {
 			comp=1;
+		}else if(numeroIdentificacion>documento.numeroIdentificacion) {
+			comp=-1;
 		}else {
 			comp=0;
 		}return comp;

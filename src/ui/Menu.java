@@ -1,10 +1,14 @@
 package Ui;
 
+import java.io.IOException;
 import java.util.Scanner;
 
+import model.AsociacionRestaurante;
+import model.Restaurante;
+
 public class Menu {
-	
-	private static final int EXIT_OPCION = 21;
+	private final static String PATH_RESTAURANTE = "data/restaurante.csv";
+	private static final int EXIT_OPCION = 18;;
 	private Scanner sc;
 	
 	public Menu(){
@@ -42,14 +46,11 @@ public class Menu {
 		menu +=     "11. IMPORTAR DATOS CLIENTE\n" ;
 		menu +=     "12. IMPORTAR DATOS PRODUCTO\n";
 		menu +=     "13. IMPORTAR DATOS PEDIDO\n" ;
-		menu +=     "14. EXPORTAR DATOS RESTAURANT\nE" ;
-		menu +=     "15. EXPORTAR DATOS CLIENTE\n" ;
-		menu +=     "16. EXPORTAR DATOS PRODUCTO\n";
-		menu +=     "17. EXPORTAR DATOS PEDIDO\n" ;
-		menu +=     "18.BUSCAR UN CLIENTE EFICIENTEMENTE\n" ;
-		menu +=     "19. LISTAR EN PANTALLA RESTAURANTES\n" ;
-		menu +=     "20.LISTAR EN PANTALLA CLIENTES\n" ;
-		menu +=     "21.GUARDAR INFORMACION\n" ;
+		menu +=     "14. EXPORTAR ORDENES\n" ;
+		menu +=     "15.BUSCAR UN CLIENTE EFICIENTEMENTE\n" ;
+		menu +=     "16. LISTAR EN PANTALLA RESTAURANTES\n" ;
+		menu +=     "17.LISTAR EN PANTALLA CLIENTES\n" ;
+		menu +=     "18.GUARDAR INFORMACION\n " ;
 		menu +=     "POR FAVOR INGRESE LA OPCION\n" ;
 				
 		
@@ -64,13 +65,39 @@ public class Menu {
 	private void ejecutarOperacion(int opcion) {
 		switch(opcion) {
 		case 1:
+			System.out.println("*************REGISTRAR RESTAURANTE****************");
+			System.out.println("Digite Nit:");
+			String nit=sc.nextLine();
+			
+			System.out.println("Digite Nombre:");
+			String nombre=sc.nextLine();
+			
+			System.out.println("Digite Nombre del Administrador:");
+			String nombreAdm=sc.nextLine();
+			System.out.println("RESTAURANTE GUARDADO EXITOSAMENTE");
+			AsociacionRestaurante objeto3 = null;
+			try {
+				objeto3 = new AsociacionRestaurante();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			try {
+				objeto3.addRestaurante(nit, nombre, nombreAdm);
+				//objeto3.listarRestaurante();
+								
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
 	    break;
 	    
 		
 		case 2:
 		    break;
 		    
-		case 3:
+		case 3:   
 		    break;
 		    
 		case 4:
@@ -92,6 +119,25 @@ public class Menu {
 		    break;
 		    
 		case 10:
+			
+			System.out.println("Importando datos Restaurante ...");
+			
+			AsociacionRestaurante objeto = null;
+			try {
+				objeto = new AsociacionRestaurante();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				objeto.importarRestaurante(PATH_RESTAURANTE);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			
+			
 		    break;
 		    
 		case 11:
@@ -101,6 +147,18 @@ public class Menu {
 		    break;
 		    
 		case 13:
+			
+			System.out.println("Importar Archivo");
+			System.out.println("Coloque la ruta del archico:");
+			String leer=sc.nextLine();
+			Restaurante rest=new Restaurante();
+			try {
+				rest.importarPedido(leer);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			rest.mostrarPedido();
 		    break;
 		    
 		case 14:
@@ -110,22 +168,29 @@ public class Menu {
 		    break;
 		    
 		case 16:
+			System.out.println("*************LISTA RESTAURANTE ORDENADO POR NIT**************");
+		
+			AsociacionRestaurante objeto2 = null;
+			try {
+				objeto2 = new AsociacionRestaurante();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		objeto2.listarRestaurante();
+		System.out.println("*************LISTA RESTAURANTE ORDENADO ALFABETICO ASCENDENTE**************");
+		objeto2.listarRestauranteAscendente();
+		
+			
 		    break;
 		    
 		case 17:
 		    break;
+		    
 		case 18:
 		    break;
 		    
-		case 19:
-		    break;
-		    
-		case 20:
-		    break;
-		    
-		case 21:
-		    break;
-		    
+		
 		 default:
 	         
 	      break;
