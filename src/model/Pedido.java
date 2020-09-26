@@ -3,93 +3,59 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Pedido  implements Serializable, Comparable<Pedido>{
+public class Pedido  implements Serializable{
 	public final static long serialVersionUID = 1;
 	
-	private int codigoPedido;
-	private int codigoCliente;
-	private int nitRestaurante;
-	private int cantidad;
-	private int hora;
-	private Date fecha;
+	private String codigoPedido;
+	private String codigoCliente;
+	private String nitRestaurante;
+	private String cantidad;
+	private String hora;
 	
 	
-	public Pedido(int codigoPedido, int codigoCliente) {
-		super();
-		this.codigoPedido = codigoPedido;
-		this.codigoCliente = codigoCliente;
-	}
-
-	public Pedido(int codigoPedido, int codigoCliente, int nitRestaurante, int cantidad, int hora,Date fecha) {
+	public Pedido(String codigoPedido, String codigoCliente, String nitRestaurante, String cantidad, String hora
+			) {
 		super();
 		this.codigoPedido = codigoPedido;
 		this.codigoCliente = codigoCliente;
 		this.nitRestaurante = nitRestaurante;
 		this.cantidad = cantidad;
 		this.hora = hora;
-		this.fecha=fecha;
 		
 	}
-	
-	Date fechas= new Date();
-	
-	 private Date dateTime;
-
-      public void setDateTime(Date datetime) {
-       this.dateTime = datetime;
-     }
-      
-      public Date getDateTime() {
-          return dateTime;
-        }
-      public Date getFecha() {
-          return fecha;
-        }
-      
-	
-	public int getCodigoPedido() {
+	public String getCodigoPedido() {
 		return codigoPedido;
 	}
-	public void setCodigoPedido(int codigoPedido) {
+	public void setCodigoPedido(String codigoPedido) {
 		this.codigoPedido = codigoPedido;
 	}
-	public int getCodigoCliente() {
+	public String getCodigoCliente() {
 		return codigoCliente;
 	}
-	public void setCodigoCliente(int codigoCliente) {
+	public void setCodigoCliente(String codigoCliente) {
 		this.codigoCliente = codigoCliente;
 	}
-	public int getNitRestaurante() {
+	public String getNitRestaurante() {
 		return nitRestaurante;
 	}
-	public void setNitRestaurante(int nitRestaurante) {
+	public void setNitRestaurante(String nitRestaurante) {
 		this.nitRestaurante = nitRestaurante;
 	}
-	public int getCantidad() {
+	public String getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(int cantidad) {
+	public void setCantidad(String cantidad) {
 		this.cantidad = cantidad;
 	}
-	public int getHora() {
+	public String getHora() {
 		return hora;
 	}
-	public void setHora(int hora) {
+	public void setHora(String hora) {
 		this.hora = hora;
-	}
+	}	
 	
-
-	@Override
-	public int compareTo(Pedido fec) {
-		   if (getDateTime() == null || fec.getDateTime() == null)
-		         return 0;
-		       return getDateTime().compareTo(fec.getDateTime());
-		     }
-
-	public static void add() {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 	}
 	
 	

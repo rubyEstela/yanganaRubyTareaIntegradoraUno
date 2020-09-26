@@ -16,7 +16,7 @@ class ProductoTest {
 			 
 		 }
 	
-
+/*
 		 @Test
 			void testaddProducto() {
 				setUpScenary1();
@@ -33,7 +33,7 @@ class ProductoTest {
 				
 				
 				
-			}
+			}*/
 			
 
 }

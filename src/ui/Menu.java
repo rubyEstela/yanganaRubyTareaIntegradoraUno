@@ -9,268 +9,229 @@ import model.Restaurante;
 
 public class Menu {
 	private final static String PATH_RESTAURANTE = "data/restaurante.csv";
-	private final static String PATH_PEDIDO = " data/pedidos.csv";
+	private final static String PATH_PEDIDO = "data/pedidos.csv";
 	private final static String PATH_PRODUCTO = "data/productos.csv ";
 	private final static String PATH_CLIENTE = "data/clientes.csv ";
 	private static final int EXIT_OPCION = 19;;
 	private Scanner sc;
-	
-	
-	
-	public Menu(){
-		
-		
-		 sc= new Scanner(System.in);
+	private AsociacionRestaurante objAsociacionRest;
+	private Restaurante objRestaurante;
+
+	public Menu() {
+
+		sc = new Scanner(System.in);
+
+		objAsociacionRest = new AsociacionRestaurante();
+		objRestaurante = new Restaurante();
+
 	}
-	
+
 	public void starMenu() {
-		
-		
-	    String menu=getMenuText();
+
+		String menu = getMenuText();
 		int opcion;
 		do {
-		System.out.println(menu);
-		opcion=leerOpcion();	
-	    ejecutarOperacion(opcion);		
-		}while(opcion!=EXIT_OPCION);
-		}
-		
+			System.out.println(menu);
+			opcion = leerOpcion();
+			ejecutarOperacion(opcion);
+		} while (opcion != EXIT_OPCION);
+	}
 
-	
 	private String getMenuText() {
-		
-		
-		
-		String menu="=====================================================\n";
-		menu +=     "               RESTAURANTES\n";
-		menu +=     "=====================================================\n";
-		menu +=     "1.REGISTRAR RESTAURANTES\n" ;
-		menu +=     "2.REGISTRAR  CLIENTES\n" ;
-		menu +=     "3.REGISTRAR PRODUCTOS\n" ;
-		menu +=     "4.REGISTRAR PEDIDOS\n" ;
-		menu +=     "5.ACTUALIZAR DATOS RESTAURANTES\n" ;
-		menu +=     "6.ACTUALIZAR DATOS CLIENTES\n" ;
-		menu +=     "7.ACTUALIZAR DATOS PRODUCTO\n" ;
-		menu +=     "8 ACTUALIZAR DATOS PEDIDOS\n" ;
-		menu +=     "9.CAMBIAR EL ESTADO DE UN PEDIDO\n" ;
-		menu +=     "10. IMPORTAR DATOS RESTAURANT\n" ;
-		menu +=     "11. IMPORTAR DATOS CLIENTE\n" ;
-		menu +=     "12. IMPORTAR DATOS PRODUCTO\n";
-		menu +=     "13. IMPORTAR DATOS PEDIDO\n" ;
-		menu +=     "14. EXPORTAR ORDENES\n" ;
-		menu +=     "15.BUSCAR UN CLIENTE EFICIENTEMENTE\n" ;
-		menu +=     "16.LISTAR EN PANTALLA RESTAURANTES\n" ;
-		menu +=     "17.LISTAR EN PANTALLA CLIENTES\n" ;
-     	menu +=     "POR FAVOR INGRESE LA OPCION\n" ;
-				
-		
+
+		String menu = "=====================================================\n";
+		menu += "               RESTAURANTES\n";
+		menu += "=====================================================\n";
+		menu += "1. IMPORTAR DATOS RESTAURANT\n";
+		menu += "2. IMPORTAR DATOS CLIENTE\n";
+		menu += "3. IMPORTAR DATOS PEDIDO\n";
+		menu += "4. IMPORTAR DATOS PRODUCTO\n";
+		menu += "5. REGISTRAR RESTAURANTES\n";
+		menu += "6. REGISTRAR  CLIENTES\n";
+		menu += "7. REGISTRAR PRODUCTOS\n";
+		menu += "8  REGISTRAR PEDIDOS\n";
+		menu += "9. LISTAR EN PANTALLA RESTAURANTES\n";
+		menu += "10. LISTAR EN PANTALLA CLIENTES\n";
+		menu += "11. ACTUALIZAR DATOS RESTAURANTES\n";
+		menu += "12. ACTUALIZAR DATOS CLIENTES\n";
+		menu += "13. ACTUALIZAR DATOS PRODUCTO\n";
+		menu += "14. ACTUALIZAR DATOS PEDIDOS\n";
+		menu += "15. CAMBIAR EL ESTADO DE UN PEDIDO\n";
+		menu += "16. EXPORTAR ORDENES\n";
+		menu += "17. BUSCAR UN CLIENTE EFICIENTEMENTE\n";
+		menu += "POR FAVOR INGRESE LA OPCION\n";
+
 		return menu;
 	}
+
 	private int leerOpcion() {
-		
+
 		int op;
-		op=Integer.parseInt(sc.nextLine());
-		//op=sc.nextInt();
+		op = Integer.parseInt(sc.nextLine());
+
 		return op;
 	}
-	
-	
-	private void ejecutarOperacion(int opcion)  {
-		
-		switch(opcion) {
-		
+
+	private void ejecutarOperacion(int opcion) {
+
+		switch (opcion) {
+
 		case 1:
-			String entrada="s";
-			AsociacionRestaurante objeto3 = null;
+			System.out.println("********************IMPORTAR ARCHIVO RESTAURANTE********************");
+			try {
+				objAsociacionRest.importarRestaurante(PATH_RESTAURANTE);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("Se importó el archivo restaurante.cvs exitosamente");
+
+			System.out.println("*********************************************************************");
+
+			break;
+
+		case 2:
+
+			System.out.println("********************IMPORTAR ARCHIVO CLIENTE********************");
+			try {
+				objRestaurante.importarCliente(PATH_CLIENTE);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("Se importó el archivo cliente.cvs exitosamente");
+
+			System.out.println("*****************************************************************");
+
+			break;
+
+		case 3:
+			System.out.println("********************IMPORTAR ARCHIVO PEDIDO********************");
+			try {
+				objRestaurante.importarPedido(PATH_PEDIDO);
+				objRestaurante.listarPedido();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.out.println("Se importó el archivo pedidos.cvs exitosamente");
+
+			System.out.println("*******************************************************************");
+
+			break;
+
+		case 4:
+
+			System.out.println("********************IMPORTAR ARCHIVO PRODUCTO********************");
+			try {
+				objRestaurante.importarProducto(PATH_PRODUCTO);
+				objRestaurante.listarProducto();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
-			while(entrada.equals("s")) {
+			System.out.println("Se importó el archivo productos.cvs exitosamente");
+
+			System.out.println("*******************************************************************");
+			break;
+
+		case 5:
+
+			String entrada = "s";
+
+			while (entrada.equals("s")) {
 				System.out.println("*************REGISTRAR RESTAURANTE****************");
 				System.out.println("Digite Nit:");
-				String nit=sc.nextLine();
-				
+				String nit = sc.nextLine();
+
 				System.out.println("Digite Nombre:");
-				String nombre=sc.nextLine();
-				
+				String nombre = sc.nextLine();
+
 				System.out.println("Digite Nombre del Administrador:");
-				String nombreAdm=sc.nextLine();
-				
-				
+				String nombreAdm = sc.nextLine();
+
 				try {
-			    objeto3 = new AsociacionRestaurante();
-			    objeto3.addRestaurante(nit, nombre, nombreAdm);
-				} catch (IOException ee) {
+					objAsociacionRest.addRestaurante(nit, nombre, nombreAdm);
+					System.out.println("Desea Registrar otro restaurante? (s) (n): ");
+					entrada = sc.nextLine();
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					ee.printStackTrace();
+					e.printStackTrace();
 				}
-				
-				System.out.println("Desea Registrar otro restaurante? (s) (n): ");
-				entrada=sc.nextLine();			
-				
+
 			}
-			objeto3.listarRestaurante();
-			
-			
-	    break;
-	    
-		
-		case 2:
-			
-			System.out.println("*************REGISTRAR CLIENTE****************");
-			
-			System.out.println("Digite numero identificacion:");
-			String identificacion=sc.nextLine();
-			
-			System.out.println("Digite Nombre:");
-			String nombres=sc.nextLine();
-			
-			System.out.println("Digite apellido:");
-			String apellido=sc.nextLine();
-			
-			System.out.println("Digite direccion:");
-			String direccion=sc.nextLine();
-			
-			System.out.println("Digite tipoIdentificacion:");
-			String tipo=sc.nextLine();
-			
-			System.out.println("Digite telefono:");
-			String telefono=sc.nextLine();			
-			
-			
-		    break;
-		    
-		case 3:   
-			System.out.println("*************REGISTRAR PRODUCTOS****************");
-			System.out.println("Digite nombre:");
-			String nombreProducto=sc.nextLine();
-			
-			System.out.println("Digite codigo:");
-			String codigos=sc.nextLine();
-			
-			System.out.println("Digite descripcion:");
-			String descripcion=sc.nextLine();
-			
-			System.out.println("Digite el costo:");
-			double  costo =Double.parseDouble(sc.nextLine());
-			System.out.println("Digite el nit del restaurante:");
-			int  nitRestaurante =Integer.parseInt(sc.nextLine());
-			
-			System.out.println("PRODUCTOS REGISTRADO EXITOSAMENTE");		
-			
-		
-		    break;
-		    
-		case 4:
-		    break;
-		    
-		case 5:
-		    break;
-		    
+			break;
+
 		case 6:
-		    break;
-		    
+			break;
+
 		case 7:
-		    break;
-		    
+			break;
+
 		case 8:
-		    break;
-		    
+			break;
+
 		case 9:
-		    break;
-		    
+			System.out.println("*****************LISTAR EN PANTALLA RESTAURANTES ASCENDENTE*************");
+			objAsociacionRest.listarRestauranteAscendente();
+			System.out.println("*************************************************************************");
+			break;
+
 		case 10:
-			
-			/*System.out.println("Importando datos Restaurante ...");
-			
-			AsociacionRestaurante objeto = null;
-			try {
-				objeto= new AsociacionRestaurante();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				objeto.importarRestaurante(PATH_RESTAURANTE);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
 
-			
-			
-		    break;
-		    
+			System.out
+					.println("*****************LISTAR EN PANTALLA CLIENTES CON EL TELEFONO DESCENDENTEE*************");
+			objRestaurante.mostrarListaCliente();
+
+			System.out
+					.println("***************************************************************************************");
+
+			break;
+
 		case 11:
-              /*System.out.println("Importando datos clientes...");
 			
-			Restaurante objeto5 = new Restaurante();
-			try {
-				objeto5.importarCliente(PATH_CLIENTE);
-				System.out.println("SE IMPORTÓ EL ARCHIVO CORRECTAMENTE.");
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
+			//pedir por escaner los datos nit,nombres,nito
+			//objAsociacionRest.actualizarDatosRest(nit, nombre, nit2, nombreAdministrador);
 			
+			//listarRestaurante
 			
-			
-		    break;
-		    
-		case 12:
-		    break;
-		    
-		case 13:
-			
-			/*System.out.println("Importar Archivo");
-			System.out.println("Coloque la ruta del archico:");
-			String leer=sc.nextLine();
-			Restaurante rest=new Restaurante();
-			try {
-				rest.importarPedido(leer);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			rest.mostrarPedido();*/
-		    break;
-		    
-		case 14:
-		    break;
-		    
-		case 15:
-		    break;
-		    
-		case 16:
-			/*System.out.println("*************LISTA RESTAURANTE ORDENADO POR NIT**************");
-		
-       	AsociacionRestaurante objeto2 = null;
-			try {
-				objeto2= new AsociacionRestaurante();
-				objeto2.listarRestaurante();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		System.out.println("*************LISTA RESTAURANTE ORDENADO ALFABETICO ASCENDENTE**************");
-		//objeto2.listarRestauranteAscendente();
-		//objeto2.listarRestaurante();*/
-		
-			
-		    break;
-		    
-		case 17://objeto5.listarCliente();
-		    break;
-		    
-		case 18:
-		    break;
-		    
-		
-		 default:
-	         
-	      break;
-		    
-	} 
 
-}	
+			break;
+
+		case 12:
+
+			break;
+
+		case 13:
+
+			
+			break;
+
+		case 14:
+
+			break;
+
+		case 15:
+			break;
+
+		case 16:
+			
+
+			break;
+
+		case 17:
+			break;
+
+		case 18:
+			break;
+
+		default:
+
+			break;
+
+		}
+
+	}
 
 }

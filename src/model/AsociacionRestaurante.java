@@ -12,30 +12,51 @@ import java.util.Collections;
 import java.util.List;
 
 public class AsociacionRestaurante {
-
-	public final static String GUARDAR_RESTAURANTES = "data/restaurantes.rt";
-	public final static String GUARDAR_CLIENTES = "data/clientes.c";
-	public final static String GUARDAR_PRODUCTOS = "data/productos.p";
-	public final static String GUARDAR_PEDIDOS = "data/pedidos.pd";
-	private final static String SEPARATOR = ",";
-	private final static String PATH_RESTAURANTE = "data/restaurante.csv";
-
+	
+//private final Static String GUARDAR_RESTAURANTES;
+private final static String SEPARATOR = ",";
+	
 	Restaurante rl = new Restaurante();
 
-	private List<Restaurante> restaurant;
+	private List<Restaurante> restaurant = new ArrayList<>();;
 
-	public AsociacionRestaurante() throws IOException {
-		restaurant = new ArrayList<>();
-		importarRestaurante(PATH_RESTAURANTE);
-
+	
+	//Permite leer el archivo restaurante:
+	public void importarRestaurante(String archivo) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivo));
+		String line = br.readLine();
+		while (line != null) {
+			String[] arreglo = line.split(SEPARATOR);
+			String nit = arreglo[0];
+			String nombre=arreglo[1];
+			String nombreAdministrador=arreglo[2];
+			addRestaurante(nit,nombre,nombreAdministrador);
+			line = br.readLine();
+		}
+		br.close();		
+		
 	}
+	
+	//Permite adiccionar a la lista los restaurantes
+	public void addRestaurante( String nit, String nombre,String nombreAdministrador) throws IOException {
+		Restaurante restaurante = new Restaurante(nit, nombre,nombreAdministrador);
+		restaurant.add(restaurante);		
+		
+	}
+	
+	//Muestra en pantalla los restaurantes de forma ascendente usando comparatorTo
+	public void listarRestauranteAscendente() {
+		Collections.sort(restaurant,new OrdenarRestauranteAsComparator());
+		for(int i=0;i<restaurant.size();i++) {
+			System.out.println(restaurant.get(i).getNit()+"  "+restaurant.get(i).getNombre()+" "+restaurant.get(i).getNombreAdministrador());
+		}
+		
+	}
+	
+	
 
 	
 
-	public List<Restaurante> getRestaurante() {
-		return restaurant;
-
-	}
 
 	
 
@@ -44,49 +65,40 @@ public class AsociacionRestaurante {
 	 * 
 	 * @throws IOException
 	 */
-
+/*
 	public void guardarRestaurantes() throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GUARDAR_RESTAURANTES));
 		oos.writeObject(restaurant);
 		oos.close();
-	}
+	}*/
 
 	/**
 	 * metodo que por medio de la serializacion guarda clientes
 	 * 
 	 * @throws IOException
 	 */
-
+/*
 	public void guardarClientes() throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GUARDAR_CLIENTES));
 		oos.writeObject(rl.getClients());
 		oos.close();
 	}
+*/
 
-	/**
-	 * metodo que por medio de la serializacion guarda productos
-	 * 
-	 * @throws IOException
-	 */
-
-	public void guardarProductos() throws IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GUARDAR_PRODUCTOS));
-		oos.writeObject(rl.getProducto());
-		oos.close();
-	}
+	
 
 	/**
 	 * metodo que por medio de la serializacion guarda pedidos
 	 * 
 	 * @throws IOException
 	 */
-
+/*
 	public void guardarpedido() throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(GUARDAR_PEDIDOS));
 		oos.writeObject(rl.getPedido());
 		oos.close();
 	}
-
+*/
 	/**
 	 * metodo que permite importar datos de un archivo csv que contine restaurantes
 	 * 
@@ -106,43 +118,18 @@ public class AsociacionRestaurante {
 	 * @param nombreAdministrador
 	 * @throws IOException
 	 */
-	public void addRestaurante( String nit, String nombre,String nombreAdministrador) throws IOException {
-		Restaurante restaurante = new Restaurante(nit, nombre,nombreAdministrador);
-		restaurant.add(restaurante);
-
-	}
-	
-	public void importarRestaurante(String archivo) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(archivo));
-		String line = br.readLine();
-		while (line != null) {
-			String[] arreglo = line.split(SEPARATOR);
-			String nit = arreglo[0];
-			String nombre=arreglo[1];
-			String nombreAdministrador=arreglo[2];
-			addRestaurante(nit,nombre,nombreAdministrador);
-			line = br.readLine();
-		}
-		br.close();
-		
-		
-	}
 	
 	
-	//Permite mostrar en pantalla la lista de restaurantes:
+	
+	
+	/*//Permite mostrar en pantalla la lista de restaurantes:
 	public void listarRestaurante() {
 		for(int i=0;i<restaurant.size();i++) {
 			System.out.println(restaurant.get(i).getNit()+"  "+restaurant.get(i).getNombre()+" "+restaurant.get(i).getNombreAdministrador());
 		}
-	}
+	}*/
 	
-	public void listarRestauranteAscendente() {
-		Collections.sort(restaurant,new OrdenarRestauranteAsComparator());
-		for(int i=0;i<restaurant.size();i++) {
-			System.out.println(restaurant.get(i).getNit()+"  "+restaurant.get(i).getNombre()+" "+restaurant.get(i).getNombreAdministrador());
-		}
-		
-	}
+	
 	
 
 	/**
