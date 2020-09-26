@@ -3,19 +3,13 @@ package test;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 
-import model.Producto;
 import model.Restaurante;
 
- public class RestauranteTest {
-	 Restaurante restau;
+class AsociacionRestauranteTest {
+	Restaurante restau;
 	 public void setUpScenary1() {
-		 
-	 }
- public void setUpScenary3() {
 		 
 	 }
 	
@@ -29,9 +23,9 @@ import model.Restaurante;
 	
 	void testRestaurante() {
 		setUpScenary1();
-		String n= "12345";
-		String nom=" hamburguesas";
-		String nomAdmi=" walter";
+		String n= "1234";
+		String nom=" pizzaAlPaso";
+		String nomAdmi=" ruby";
 		
 		Restaurante r= new Restaurante(n,nom,nomAdmi);
 		assertEquals(n, r.getNit());
@@ -41,13 +35,11 @@ import model.Restaurante;
 		
 		}
 	
-	@Test
-	
 	void testRestaurante2() {
 		setUpScenary1();
-		String n= "899";
-		String nom="frijolesVerdes";
-		String nomAdmi=" Diego";
+		String n= "567";
+		String nom=" dominos";
+		String nomAdmi=" martha";
 		
 		Restaurante r= new Restaurante(n,nom,nomAdmi);
 		assertEquals(n, r.getNit());
@@ -60,8 +52,6 @@ import model.Restaurante;
 	/**
 	 * crear un nuevo contacto vacio
 	 */
-	
-	
 	
 	
 @Test
@@ -77,18 +67,4 @@ import model.Restaurante;
 		
 		}
 	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
