@@ -138,9 +138,9 @@ public class Menu {
 
 		case 5:
 
-			String entrada = "s";
+			String entradaRes = "s";
 
-			while (entrada.equals("s")) {
+			while (entradaRes.equals("s")) {
 				System.out.println("*************REGISTRAR RESTAURANTE****************");
 				System.out.println("Digite Nit:");
 				String nit = sc.nextLine();
@@ -154,16 +154,48 @@ public class Menu {
 				try {
 					objAsociacionRest.addRestaurante(nit, nombre, nombreAdm);
 					System.out.println("Desea Registrar otro restaurante? (s) (n): ");
-					entrada = sc.nextLine();
+					entradaRes = sc.nextLine();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 			break;
 
 		case 6:
+			
+			String entradaClient = "s";
+
+			while (entradaClient.equals("s")) {
+				System.out.println("*************REGISTRAR CLIENTES****************");
+				System.out.println("digite numero identificacion");
+				String identificacion = sc.nextLine();
+
+				System.out.println("Digite nombre:");
+				String nombre = sc.nextLine();
+
+				System.out.println("Digite apellido:");
+				String apellido= sc.nextLine();
+				
+				System.out.println("Digite direccion:");
+				String direccion= sc.nextLine();
+
+				System.out.println("Digite tipoIdentificacion:");
+				String tipoidentificacion= sc.nextLine();
+
+				System.out.println("Digite telefono:");
+				String telefono= sc.nextLine();
+
+
+				try {
+				objRestaurante.registrarCliente(identificacion, nombre, apellido, direccion, tipoidentificacion, telefono);
+					System.out.println("Desea Registrar otro Cliente? (s) (n): ");
+					entradaClient = sc.nextLine();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			break;
 
 		case 7:

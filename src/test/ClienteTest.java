@@ -30,6 +30,8 @@ class ClienteTest {
 			String telefono="3245678";
 			
 			
+			
+			
 			Cliente r= new Cliente(numeroIdentificacion,nombre,apellido,direccion,tipoIdentificacion,telefono);
 			assertEquals(numeroIdentificacion, r.getNumeroidentificacion());
 			assertEquals(nombre, r.getNombre());
