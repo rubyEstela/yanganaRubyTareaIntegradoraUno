@@ -7,11 +7,13 @@ import java.io.Serializable;
 
 public class Producto implements Serializable {
 	public final static long serialVersionUID = 1;
+	
 	private String nombre;
 	private String codigo;
 	private String descripcion;
 	private double costo;
 	private int nitRestaurante2;
+	
 	public Producto(String nombre, String codigo, String descripcion, double costo,int nitRestaurante2) {
 		super();
 		this.nombre = nombre;
@@ -22,7 +24,8 @@ public class Producto implements Serializable {
 	}
 	public Producto(String nombre2, String nombre3, String nombre4, String nit, String nit2) {
 		// TODO Auto-generated constructor stub
-	}
+}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -57,6 +60,7 @@ public class Producto implements Serializable {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	
 	

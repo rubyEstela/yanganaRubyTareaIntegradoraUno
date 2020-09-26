@@ -16,9 +16,7 @@ public class Restaurante implements Serializable{
 	private String nombre;	
 	private String nombreAdministrador;
 	private final static String SEPARATOR = ",";
-	private final static String PATH_PEDIDO = " data/pedidos.csv";
-	private final static String PATH_PRODUCTO = "data/productos.csv ";
-	private final static String PATH_CLIENTE = "data/clientes.csv ";
+	
 
 	public Restaurante(String nit, String nombre,String nombreAdministrador)  {	
 		
@@ -61,9 +59,7 @@ public class Restaurante implements Serializable{
 
 	}
 
-	public void ordenarIdentificacionCliente() {
-		Collections.sort(clientes);
-	}
+	
 
 	public void ordenarPorCodigoProducto() {
 		OrdenarCodigoProductoComparator nc = new OrdenarCodigoProductoComparator();
@@ -83,9 +79,8 @@ public class Restaurante implements Serializable{
 	 * @param direccion
 	 */
 
-/**	public void addClientes(String nombre, String apellido, int tipoDocumento, int numeroIdentificacion, int telefono,
-			String direccion) {
-		Cliente cli = new Cliente(nombre, apellido, tipoDocumento, numeroIdentificacion, telefono, direccion);
+public void registrarCliente(String numeroIdentificacion,String nombre,String apellido,String direccion,String tipoIdentificacion,String telefono) {
+		Cliente cli = new Cliente(numeroIdentificacion, nombre, apellido, direccion, tipoIdentificacion, telefono);
 
 		if (clientes.isEmpty()) {
 			clientes.add(cli);
@@ -93,24 +88,39 @@ public class Restaurante implements Serializable{
 		} else {
 			int i = 0;
                  
-        while (i < clientes.size() && <(clientes.get(i).getNombre()) > 0) {
+        while (cli.getApellido().compareTo(clientes.get(i).getApellido())>0) {
 				i++;
 			}
 			clientes.add(i, cli);
 
 		}
-	}**/
+	
+}
+	
+	
+	public void addCliente( String numeroIdentificacion,String nombre,String apellido,String direccion,String tipoIdentificacion,String telefono)  {
+		Cliente objetoCliente = new Cliente(numeroIdentificacion,nombre,apellido,direccion,tipoIdentificacion,telefono);
+		clientes.add(objetoCliente);
 
+	}
+	
 	/**
 	 * metodo que agrega producto a la lista de productos
 	 * 
 	 * @return
 	 */
 
-	public void addProducto(String nombre, String codigo, String descripcion, double costo) {
-		Producto prod = new Producto(nombre, codigo, descripcion, costo, 0);
-		Producto.add(prod);
+	public void addProducto(String nombre, String codigo, String descripcion, double costo,int nitRestaurant2) {
+		Producto prod = new Producto(nombre, codigo, descripcion, costo, nitRestaurant2);
+		productos.add(prod);
 	}
+	
+	//Permite mostrar en pantalla la lista de producto:
+		public void listarProducto() {
+			for(int i=0;i<productos.size();i++) {
+				System.out.println(productos.get(i).getNombre()+"  "+productos.get(i).getCodigo()+" "+productos.get(i).getDescripcion()+"  "+productos.get(i).getCosto()+"  "+productos.get(i).getNitRestaurante());
+			}
+		}
 
 	/**
 	 * metodo que agrega pedido a la lista de pedidos
@@ -160,7 +170,7 @@ public class Restaurante implements Serializable{
 			String[] parts = line.split(SEPARATOR);
 			String name = parts[0];
 			double amount = Double.parseDouble(parts[1]);
-			addProducto(name, name, name, amount);
+			addProducto(name, name, name, amount, 0);
 
 			line = br.readLine();
 		}
@@ -181,19 +191,7 @@ public class Restaurante implements Serializable{
 	 * @throws IOException
 	 */
 
-	public void importarCLiente(String p) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(p));
-		String line = br.readLine();
-		while (line != null) {
-			String[] parts = line.split(SEPARATOR);
-			String name = parts[0];
-			double amount = Double.parseDouble(parts[1]);
-			addProducto(name, name, name, amount);
-
-			line = br.readLine();
-		}
-		br.close();
-	}
+	
 
 	/**
 	 * metodo que importa pedidos de un archivo desde una archivo csv
@@ -215,7 +213,44 @@ public class Restaurante implements Serializable{
 			line = br.readLine();
 		}
 		br.close();
+		
+		/**
+		 * metodo que importa clientes  de un archivo desde una archivo csv
+		 * 
+		 * @param pd
+		 * @throws IOException
+		 */
 
+	}
+	public void importarCliente(String archivo) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(archivo));
+		String line = br.readLine();
+		while (line != null) {
+			String[] arreglo = line.split(SEPARATOR);
+			String numeroIdentificacion=arreglo[0];
+			String nombre = arreglo[1];
+			String apellido=arreglo[2];
+			String direccion= arreglo[3];
+			String tipoDocumento=arreglo[4];
+			String telefono=arreglo[5];
+			
+			registrarCliente(numeroIdentificacion,nombre,apellido,direccion,tipoDocumento,telefono);
+			line = br.readLine();
+		}
+		br.close();
+		
+		
+	}
+	
+	/**
+	 * Permite mostrar en pantalla la lista de clientes:
+	 */
+	public void listarCliente() {
+		for(int i=0;i<clientes.size();i++) {
+			System.out.println(clientes.get(i).getNumeroidentificacion()+"  "+
+		clientes.get(i).getNombre()+"  " + clientes.get(i).getApellido()+ "  " + clientes.get(i).getDireccion()+ "  " 
+		+clientes.get(i).getTipoIdentificacion() + "  " + clientes.get(i).getTelefono());
+		}
 	}
 
 	
@@ -258,36 +293,7 @@ public class Restaurante implements Serializable{
 	 * IDENTIFICACION
 	 */
 
-	public void actualizarDatosCliente(String nombre, String apellido, int tipoIdentificacion, int numeroIdentificacion,
-			int telefono, String direccion) {
-
-		boolean encontro = false;
-		int inicio = 0;
-		int fin = clientes.size() - 1;
-		Cliente cl = clientes.get(0);
-		while (inicio <= fin && !encontro) {
-			int medio = (inicio + fin) / 2;
-			cl = clientes.get(medio);
-			if (cl.getNumeroIdentificacion() < (numeroIdentificacion)) {
-				encontro = true;
-			} else if (cl.getNumeroIdentificacion() > (numeroIdentificacion)) {
-				fin = medio - 1;
-
-			} else {
-				inicio = medio + 1;
-			}
-
-		}
-
-		cl.setNombre(nombre);
-		cl.setApellido(apellido);
-		cl.setNumeroIdentificacion(numeroIdentificacion);
-		cl.setTipoDocumento(tipoIdentificacion);
-		cl.setTelefono(telefono);
-		cl.setDireccion(direccion);
-
-	}
-
+	
 	/**
 	 * Este metodo actualiza los datos de un PEDIDO dado el CODIGO
 	 */

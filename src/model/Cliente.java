@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Cliente implements Serializable,  Comparable<Cliente>{
+public class Cliente implements Serializable {
 	public final static long serialVersionUID = 1;
 	
 	public static int TI = 1;
@@ -14,12 +14,13 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 	public static int PP = 3;
 	public static int CE = 4;
 	
+	private String numeroidentificacion;
 	private String nombre;
 	private String apellido;
-	private int tipoIdentificacion;
-	private int numeroIdentificacion;
-	private int telefono;
 	private String direccion;
+	private String tipoIdentificacion;
+	private String telefono;
+	
 	private final static String SEPARATOR = ",";
 	
 	private List<Pedido> pedidos;
@@ -34,109 +35,74 @@ public class Cliente implements Serializable,  Comparable<Cliente>{
 	}
 	
 	
-	
-	public Cliente(String nombre, String apellido, int tipoIdentificacion,int numeroIdentificacion, int telefono, String direccion) {
-		super();
+
+	public Cliente(String numeroidentificacion, String nombre, String apellido, String direccion,
+			String tipoIdentificacion, String telefono) {
+		
+		this.numeroidentificacion = numeroidentificacion;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.tipoIdentificacion=tipoIdentificacion;
-		this.numeroIdentificacion = numeroIdentificacion;
-		this.telefono = telefono;
 		this.direccion = direccion;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.telefono = telefono;
 	}
-	
-	
+
+	public String getNumeroidentificacion() {
+		return numeroidentificacion;
+	}
+
+	public void setNumeroidentificacion(String numeroidentificacion) {
+		this.numeroidentificacion = numeroidentificacion;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
-	
-	public int getTipoDocumento() {
-		return tipoIdentificacion;
-	}
-	public void setTipoDocumento(int tipoDocumento) {
-		this.tipoIdentificacion = tipoDocumento;
-	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public int getNumeroIdentificacion() {
-		return numeroIdentificacion;
-	}
-	public void setNumeroIdentificacion(int numeroIdentificacion) {
-		this.numeroIdentificacion = numeroIdentificacion;
-	}
-	public int getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public static int getCedulaDeCiudadania() {
-		return CC;
-	}
-	public static int getTargetaDeIdentidad() {
-		return TI;
-	}
-	public static int getCedulaExtrangera() {
-		return CE;
-	}
-	public static int getPasaporte() {
-		return PP;
-	}
-	
-	public int typeDocuments() {
-		int tipo = 0;
-		if (tipoIdentificacion == TI) {
-			tipo= 1;
-		}
-		if (tipoIdentificacion == CC) {
-			tipo= 2;
 
-		}
-		if (tipoIdentificacion == PP) {
-			tipo = 3;
+	public String getTipoIdentificacion() {
+		return tipoIdentificacion;
+	}
 
-		} else {
-			tipo= 4;
-		}
+	public void setTipoIdentificacion(String tipoIdentificacion) {
+		this.tipoIdentificacion = tipoIdentificacion;
+	}
 
-		return tipo;
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	/*@Override
+	public int compareTo(Cliente apell) {
 		
 
-	}
-	
-	
-	/**
-	 * ordeno  el numero de identificacion del cliente de manera descendente
-	 */
-	@Override
-	public int compareTo(Cliente documento) {
-		int comp;
-		if(numeroIdentificacion<documento.numeroIdentificacion) {
-			comp=1;
-		}else if(numeroIdentificacion>documento.numeroIdentificacion) {
-			comp=-1;
-		}else {
-			comp=0;
-		}return comp;
-		
-	}
-	
-	
-	
-	
 	
 
-}
+	}*/
+	
+	}	
+
+

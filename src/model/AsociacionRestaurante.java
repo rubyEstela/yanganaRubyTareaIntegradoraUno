@@ -124,6 +124,8 @@ public class AsociacionRestaurante {
 			line = br.readLine();
 		}
 		br.close();
+		
+		
 	}
 	
 	
@@ -141,6 +143,7 @@ public class AsociacionRestaurante {
 		}
 		
 	}
+	
 
 	/**
 	 * metodo que permite exportar los datos del restaurante dado su nit
